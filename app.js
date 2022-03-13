@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.MONGODB_URI || `mongodb://localhost:27017/todo-list`, {
+  .connect(process.env.MONGODB_URI || `mongodb+srv://maybank:jkgQSCPtmCClE1ZZ@cluster0.jhald.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
     useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
