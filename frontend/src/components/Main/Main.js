@@ -62,7 +62,7 @@ const Todo = (props) => {
             </Nav>
             <TabContent activeTab={activeTab}>
               <TabPane tabId='latest' role='tabpanel'>
-                <LatestTable />
+                {activeTab === 'latest' && <LatestTable />}
               </TabPane>
               <TabPane tabId='all' role='tabpanel'>
                 <TodoTable />

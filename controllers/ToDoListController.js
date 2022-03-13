@@ -30,8 +30,26 @@ const deleteById = async (req, res, next) => {
   res.status(200).json({ status: 'success' });
 };
 
+const getReviewStatistic = async (req, res, next) => {
+  const data = await ToDoListServices.getReviewStatistic();
+  res.status(200).json(data);
+};
+
+const getReviewChart = async (req, res, next) => {
+  const data = await ToDoListServices.getReviewChart();
+  res.status(200).json(data);
+};
+
+const getLatest = async (req, res, next) => {
+  const data = await ToDoListServices.getLatest();
+  res.status(200).json(data);
+};
+
 exports.create = create;
 exports.getAll = getAll;
 exports.updateById = updateById;
 exports.deleteById = deleteById;
 exports.getById = getById;
+exports.getReviewStatistic = getReviewStatistic;
+exports.getReviewChart = getReviewChart;
+exports.getLatest = getLatest;

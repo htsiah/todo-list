@@ -17,14 +17,17 @@ const TodoTable = (props) => {
   const [docID, setDocID] = useState('');
 
   useEffect(() => {
-    const fetchCustomers = async () => {
+    const fetchData = async () => {
       try {
         const responce = await fetch(process.env.REACT_APP_BACKEND_URL + '/todolist');
         const responceData = await responce.json();
+        if (responceData.length < 1) {
+          toggleTodoModal('');
+        }
         setTableData(responceData);
       } catch (err) {}
     };
-    fetchCustomers();
+    fetchData();
   }, []);
 
   const toggleTodoModal = (p_id) => {

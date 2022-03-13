@@ -15,8 +15,6 @@ import { AuthContext } from './components/Contexts/AuthContext';
 const waitFor = (Tag) => (props) => <Tag {...props} />;
 
 const Login = lazy(() => import('./components/Login/LoginForm'));
-const MyAppointment = lazy(() => import('./components/Appointment/Appointment'));
-const MakeAppointment = lazy(() => import('./components/Appointment/AppointmentForm'));
 const Main = lazy(() => import('./components/Main/Main'));
 
 // List of routes that uses the page layout
@@ -75,39 +73,6 @@ const Routes = ({ location }) => {
       </Base>
     );
   }
-
-  // if (listofPages.indexOf(location.pathname) > -1) {
-  //   return (
-  //     // Page Layout component wrapper
-  //     <BasePage>
-  //       <Suspense fallback={<PageLoader />}>
-  //         <Switch location={location}>{/* See full project for reference */}</Switch>
-  //       </Suspense>
-  //     </BasePage>
-  //   );
-  // } else {
-  //   return (
-  //     // Layout component wrapper
-  //     // Use <BaseHorizontal> to change layout
-  //     <Base>
-  //       <TransitionGroup>
-  //         <CSSTransition key={currentKey} timeout={timeout} classNames={animationName} exit={false}>
-  //           <div>
-  //             <Suspense fallback={<PageLoader />}>
-  //               <Switch location={location}>
-  //                 <Route path='/' component={waitFor(Login)} />
-  //                 <Route path='/myappointment' component={waitFor(MyAppointment)} />
-  //                 <Route path='/makeappointment' component={waitFor(MakeAppointment)} />
-
-  //                 <Redirect to='/myappointment' />
-  //               </Switch>
-  //             </Suspense>
-  //           </div>
-  //         </CSSTransition>
-  //       </TransitionGroup>
-  //     </Base>
-  //   );
-  // }
 };
 
 export default withRouter(Routes);

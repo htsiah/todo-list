@@ -4,6 +4,19 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import FlotChart from './Flot';
 
 const ReviewChart = (props) => {
+  const [chartData, setChartData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responce = await fetch(process.env.REACT_APP_BACKEND_URL + '/todolist/getreviewchart');
+        const responceData = await responce.json();
+        setChartData(responceData);
+      } catch (err) {}
+    };
+    fetchData();
+  }, []);
+
   const chartOption = {
     series: {
       pie: {
@@ -29,24 +42,14 @@ const ReviewChart = (props) => {
     },
   };
 
-  const chartData = [
-    {
-      color: '#ff3e43',
-      data: 80,
-      label: 'Completed Task',
-    },
-    {
-      color: '#937fc7',
-      data: 20,
-      label: 'In-completed task',
-    },
-  ];
-
   return (
     <Card className='card-default'>
       <CardHeader>Donut Chart</CardHeader>
       <CardBody>
         <FlotChart options={chartOption} data={chartData} className='flot-chart' height='250px' />
+        <center>
+          <h2>Completed task vs incompleted task</h2>
+        </center>
       </CardBody>
     </Card>
   );
