@@ -1,0 +1,23 @@
+{
+  "myappointment": {
+    "TITLE": "我的约定"
+  },
+  "makeappointment": {
+    "TITLE": "提前预约"
+  },
+  "sidebar": {
+    "MYAPPOINTMENT": "我的约定",
+    "MAKEAPPOINTMENT": "提前预约",
+    "heading": {
+      "HEADER": "主导航"
+    }
+  },
+  "form": {
+    "NAME": "名字",
+    "EMAIL": "电子邮件",
+    "MOBILE": "手机号码",
+    "CARBRAND": "汽车品牌",
+    "DATE": "日期",
+    "TIME": "时间"
+  }
+}

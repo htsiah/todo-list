@@ -1,0 +1,23 @@
+{
+  "myappointment": {
+    "TITLE": "My Appointment"
+  },
+  "makeappointment": {
+    "TITLE": "Make Appointment"
+  },
+  "sidebar": {
+    "MYAPPOINTMENT": "My Appointment",
+    "MAKEAPPOINTMENT": "Make Appointment",
+    "heading": {
+      "HEADER": "Main Navigation"
+    }
+  },
+  "form": {
+    "NAME": "Name",
+    "EMAIL": "Email",
+    "MOBILE": "Mobile No",
+    "CARBRAND": "Car Brand",
+    "DATE": "Date",
+    "TIME": "Time"
+  }
+}
