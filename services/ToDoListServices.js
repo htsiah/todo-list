@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const ToDoListModel = require('../Models/ToDoListModel');
+const ToDoListModel = require('../models/ToDoListModel');
 
 const create = (p_body) => {
   const { status, priority, description, dueAt } = p_body;
