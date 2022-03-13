@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post('/', ToDoListController.create);
 router.get('/', ToDoListController.getAll);
+router.get('/getbyid/', ToDoListController.getById);
 router.patch('/', ToDoListController.updateById);
 router.delete('/', ToDoListController.deleteById);
 

@@ -23,14 +23,7 @@ const TodoModalFormValidation = (initialFormValues, FormValidationRules, props) 
     } else {
       const fetchFieldValues = async () => {
         try {
-          // const responceData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/machinewarrantycust/' + props.docID);
-          const responceData = {
-            id: '',
-            status: '',
-            prority: '',
-            description: '',
-            dueAt: moment(),
-          };
+          const responceData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/todolist/getbyid?id=' + props.docID);
           setValues({
             ...responceData,
             dueAt: moment(responceData.dueAt).format('DD-MMM-YYYY'),
@@ -49,41 +42,24 @@ const TodoModalFormValidation = (initialFormValues, FormValidationRules, props) 
         if (props.docID === '') {
           const createDoc = async () => {
             try {
-              // const responce = await fetch(process.env.REACT_APP_BACKEND_URL + '/machinewarrantycust', {
-              //   method: 'POST',
-              //   headers: {
-              //     Accept: 'application/json',
-              //     'Content-Type': 'application/json',
-              //   },
-              //   body: JSON.stringify({
-              //     snno: values.snno,
-              //     item: values.item,
-              //     ccode: values.ccode,
-              //     cname: values.cname,
-              //     invno: values.invno,
-              //     idate: moment(values.idate).format('DD-MMM-YYYY'),
-              //     wary: values.wary,
-              //     edate: moment(values.edate).format('DD-MMM-YYYY'),
-              //     repno: values.repno,
-              //   }),
-              // });
-              // const responseData = await responce.json();
-              // props.addTableData({
-              //   ...values,
-              //   id: responseData._id,
-              // });
-              alert(
-                JSON.stringify(
-                  {
-                    status: values.status,
-                    prority: values.prority,
-                    description: values.description,
-                    dueAt: values.dueAt,
-                  },
-                  null,
-                  4
-                )
-              );
+              const responce = await fetch(process.env.REACT_APP_BACKEND_URL + '/todolist', {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  status: values.status,
+                  priority: values.priority,
+                  description: values.description,
+                  dueAt: moment(values.dueAt).format('DD-MMM-YYYY'),
+                }),
+              });
+              const responseData = await responce.json();
+              props.addTableData({
+                ...values,
+                id: responseData._id,
+              });
               setIsSubmitting(false);
             } catch (err) {}
           };
@@ -92,18 +68,13 @@ const TodoModalFormValidation = (initialFormValues, FormValidationRules, props) 
           const updateDoc = async () => {
             try {
               await sendRequest(
-                process.env.REACT_APP_BACKEND_URL + '/machinewarrantycust/' + props.docID,
+                process.env.REACT_APP_BACKEND_URL + '/todolist?id=' + props.docID,
                 'PATCH',
                 JSON.stringify({
-                  snno: values.snno,
-                  item: values.item,
-                  ccode: values.ccode,
-                  cname: values.cname,
-                  invno: values.invno,
-                  idate: moment(values.idate).format('DD-MMM-YYYY'),
-                  wary: values.wary,
-                  edate: moment(values.edate).format('DD-MMM-YYYY'),
-                  repno: values.repno,
+                  status: values.status,
+                  priority: values.priority,
+                  description: values.description,
+                  dueAt: moment(values.dueAt).format('DD-MMM-YYYY'),
                 }),
                 { 'Content-Type': 'application/json' }
               );

@@ -9,8 +9,8 @@ export default function TodoModalFormValidationRules(values) {
     errors.status = 'Please select status.';
   }
 
-  if (!values.prority) {
-    errors.prority = 'Please select prority.';
+  if (!values.priority) {
+    errors.priority = 'Please select priority.';
   }
 
   if (!values.description) {

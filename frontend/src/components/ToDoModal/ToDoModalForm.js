@@ -8,7 +8,6 @@ import TodoModalFormValidation from './TodoModalFormValidation';
 import TodoModalFormValidationRules from './ToDoModalFormValidationRules';
 
 const TodoModalForm = (props) => {
-  const [showToDoModal, setShowTodoModal] = useState(false);
   const [docID, setDocID] = useState('');
   const INITIAL_FIELDS_VALUES = {
     id: '',
@@ -24,18 +23,18 @@ const TodoModalForm = (props) => {
       <Modal isOpen={props.showTodoModal} toggle={(e) => props.toggleTodoModal('')}>
         <ModalHeader toggle={(e) => props.toggleTodoModal('')}>{props.docID === '' ? 'Add New Item' : 'Edit Item'}</ModalHeader>
         <ModalBody>
-          <form className='form-horizontal'>
+          <form className='form-horizontal' onSubmit={handleSubmit}>
             <FormGroup row>
               <div className='col-xl-12'>
                 <select id='status' name='status' type='text' onChange={handleChange} onBlur={handleBlur} value={values.status} className={errors.status ? 'custom-select custom-select-sm is-invalid' : 'custom-select custom-select-sm'}>
                   <option key='0' value=''>
                     Select Status
                   </option>
-                  <option key='1' value='Completed'>
-                    Completed
-                  </option>
-                  <option key='2' value='Incomplete'>
+                  <option key='1' value='Incomplete'>
                     Incomplete
+                  </option>
+                  <option key='2' value='Completed'>
+                    Completed
                   </option>
                 </select>
                 {errors.status && <p className='text-danger'>{errors.status}</p>}
@@ -43,7 +42,7 @@ const TodoModalForm = (props) => {
             </FormGroup>
             <FormGroup row>
               <div className='col-xl-12'>
-                <select id='prority' name='prority' type='text' onChange={handleChange} onBlur={handleBlur} value={values.prority} className={errors.prority ? 'custom-select custom-select-sm is-invalid' : 'custom-select custom-select-sm'}>
+                <select id='priority' name='priority' type='text' onChange={handleChange} onBlur={handleBlur} value={values.priority} className={errors.priority ? 'custom-select custom-select-sm is-invalid' : 'custom-select custom-select-sm'}>
                   <option key='0' value=''>
                     Select Priority
                   </option>

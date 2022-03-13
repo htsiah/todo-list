@@ -9,12 +9,12 @@ const DelBtn = (props) => {
   const state = {
     delOption: {
       title: 'Are you sure?',
-      text: 'Your slot will be given to others!',
+      text: '',
       icon: 'warning',
       buttons: {
         cancel: true,
         confirm: {
-          text: 'Yes, cancel!',
+          text: 'Yes',
           value: true,
           visible: true,
           className: 'bg-danger',
@@ -27,6 +27,7 @@ const DelBtn = (props) => {
   const handleDeleteConfirm = async (isConfirm) => {
     if (isConfirm) {
       try {
+        console.log(process.env.REACT_APP_BACKEND_URL + props.delurl);
         await sendRequest(process.env.REACT_APP_BACKEND_URL + props.delurl, 'DELETE');
         props.onDeleteData(props.docid);
       } catch (err) {}
@@ -35,8 +36,8 @@ const DelBtn = (props) => {
 
   return (
     <>
-      <Swal options={state.delOption} callback={handleDeleteConfirm} title="Cancel Appointment" className="btn btn-sm btn-danger">
-        <i className="fa fa-times"></i>
+      <Swal options={state.delOption} callback={handleDeleteConfirm} title='Delete Task' className='btn btn-sm btn-danger'>
+        <i className='fa fa-times'></i>
       </Swal>
     </>
   );

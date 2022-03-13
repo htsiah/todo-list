@@ -12,10 +12,16 @@ const getAll = async (req, res, next) => {
   res.json(data.map((doc) => doc.toObject({ getters: true })));
 };
 
+const getById = async (req, res, next) => {
+  const { id } = req.query;
+  const data = await ToDoListServices.getById(id);
+  res.status(200).json(data);
+};
+
 const updateById = async (req, res, next) => {
   const { id } = req.query;
   const data = await ToDoListServices.getByIdAndUpdate(id, req.body);
-  res.status(200).json({ status: 'success' });
+  res.status(200).json(data);
 };
 
 const deleteById = async (req, res, next) => {
@@ -28,3 +34,4 @@ exports.create = create;
 exports.getAll = getAll;
 exports.updateById = updateById;
 exports.deleteById = deleteById;
+exports.getById = getById;

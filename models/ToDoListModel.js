@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const toDoListSchema = new Schema({
   status: { type: String },
-  prority: { type: String },
+  priority: { type: String },
   description: { type: String },
   dueAt: { type: Date },
 });

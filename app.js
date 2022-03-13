@@ -5,7 +5,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const appointmentRouters = require('./routes/AppointmentRoutes');
 const toDoListRoutes = require('./routes/ToDoListRoutes');
 
 const app = express();
@@ -21,7 +20,6 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join('public')));
 
-app.use('/api/appointment', appointmentRouters);
 app.use('/api/todolist', toDoListRoutes);
 
 app.use((req, res, next) => {

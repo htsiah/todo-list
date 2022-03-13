@@ -4,9 +4,9 @@ import { Container, Card, CardBody } from 'reactstrap';
 import moment from 'moment';
 
 import Datatable from '../Common/Datatable';
-import ToDoTableRow from './ToDoTableRow';
 import TodoModalForm from '../ToDoModal/ToDoModalForm';
 import { AuthContext } from '../Contexts/AuthContext';
+import DelBtn from '../Common/DelBtn';
 
 // CSS Loaders
 import 'spinkit/css/spinkit.css';
@@ -15,29 +15,12 @@ const TodoTable = (props) => {
   const [tableData, setTableData] = useState();
   const [showToDoModal, setShowTodoModal] = useState(false);
   const [docID, setDocID] = useState('');
-  const auth = useContext(AuthContext);
 
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        // const responce = await fetch(process.env.REACT_APP_BACKEND_URL + '/customer');
-        // const responceData = await responce.json();
-        const responceData = [
-          {
-            id: '1',
-            status: '2',
-            priority: '3',
-            description: '4',
-            dueAt: moment(),
-          },
-          {
-            id: '2',
-            status: '2',
-            priority: '3',
-            description: '4',
-            dueAt: moment(),
-          },
-        ];
+        const responce = await fetch(process.env.REACT_APP_BACKEND_URL + '/todolist');
+        const responceData = await responce.json();
         setTableData(responceData);
       } catch (err) {}
     };
@@ -49,14 +32,26 @@ const TodoTable = (props) => {
     setShowTodoModal((prevState) => !prevState);
   };
 
-  const handleDeleteData = (id) => {
+  const addTableData = (data) => {
+    const newTableData = tableData.concat(data);
+    setTableData(newTableData);
+  };
+
+  const updateTableData = (data) => {
+    const elementsIndex = tableData.findIndex((element) => element.id === data.id);
+    let newTableData = [...tableData];
+    newTableData[elementsIndex] = data;
+    setTableData(newTableData);
+  };
+
+  const deleteTableData = (id) => {
     setTableData((prevTableData) => prevTableData.filter((data) => data.id !== id));
   };
 
   const dtOptions = {
     pageLength: 10, // Show 10 rows
     paging: true, // Table pagination
-    ordering: true, // Column ordering
+    ordering: false, // Column ordering
     info: true, // Bottom left status text
     responsive: false,
     bAutoWidth: false, //for better responsiveness
@@ -72,7 +67,7 @@ const TodoTable = (props) => {
             </span>
             Add Task
           </button>
-          <TodoModalForm docID={docID} showTodoModal={showToDoModal} toggleTodoModal={toggleTodoModal} />
+          <TodoModalForm docID={docID} showTodoModal={showToDoModal} toggleTodoModal={toggleTodoModal} addTableData={addTableData} updateTableData={updateTableData} />
         </div>
       </div>
       <Container fluid>
@@ -111,7 +106,22 @@ const TodoTable = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      <ToDoTableRow data={tableData} onDeleteData={handleDeleteData} />
+                      {tableData.map((ToDo) => (
+                        <tr key={ToDo.id}>
+                          <td>{ToDo.status}</td>
+                          <td>{ToDo.priority}</td>
+                          <td>{ToDo.description}</td>
+                          <td>{moment(ToDo.dueAt).format('DD-MMM-YYYY')}</td>
+                          <td>
+                            <div className='btn-group'>
+                              <button className='btn btn-sm btn-primary' type='button' onClick={() => toggleTodoModal(ToDo.id)} alt='Edit Task'>
+                                <i className='fa fa-pencil-alt'></i>
+                              </button>
+                              <DelBtn docid={ToDo.id} delurl={'/todolist?id=' + ToDo.id} onDeleteData={deleteTableData} />
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </Datatable>

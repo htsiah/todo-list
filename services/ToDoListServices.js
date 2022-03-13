@@ -2,12 +2,12 @@ const { v4: uuidv4 } = require('uuid');
 const ToDoListModel = require('../Models/ToDoListModel');
 
 const create = (p_body) => {
-  const { status, prority, description, dueAt } = p_body;
+  const { status, priority, description, dueAt } = p_body;
 
   const newDoc = new ToDoListModel({
     id: uuidv4(),
     status: status,
-    prority: prority,
+    priority: priority,
     description: description,
     dueAt: dueAt,
   });
@@ -33,6 +33,18 @@ const get = async () => {
   return documents;
 };
 
+const getById = async (p_id) => {
+  let doc;
+  try {
+    doc = await ToDoListModel.findOne({ _id: p_id });
+  } catch {
+    const error = new Error('Find document failed.');
+    return next(error);
+  }
+
+  return doc;
+};
+
 const deleteById = async (p_id) => {
   try {
     await ToDoListModel.findByIdAndDelete(p_id);
@@ -45,13 +57,13 @@ const deleteById = async (p_id) => {
 };
 
 const getByIdAndUpdate = async (p_id, p_body) => {
-  const { status, prority, description, dueAt } = p_body;
+  const { status, priority, description, dueAt } = p_body;
 
   let doc;
   try {
     doc = await ToDoListModel.findByIdAndUpdate(p_id, {
       status: status,
-      prority: prority,
+      priority: priority,
       description: description,
       dueAt: dueAt,
     });
@@ -67,3 +79,4 @@ exports.create = create;
 exports.get = get;
 exports.deleteById = deleteById;
 exports.getByIdAndUpdate = getByIdAndUpdate;
+exports.getById = getById;
