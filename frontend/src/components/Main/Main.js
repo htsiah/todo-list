@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Card, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
-import { Container, Row, Col, CardHeader, CardBody } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 import TodoTable from '../ToDoTable/ToDoTable';
 import LatestTable from '../LastestTable/LastestTable';

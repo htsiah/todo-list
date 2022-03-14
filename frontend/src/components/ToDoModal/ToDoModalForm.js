@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import moment from 'moment';
@@ -8,7 +8,6 @@ import TodoModalFormValidation from './TodoModalFormValidation';
 import TodoModalFormValidationRules from './ToDoModalFormValidationRules';
 
 const TodoModalForm = (props) => {
-  const [docID, setDocID] = useState('');
   const INITIAL_FIELDS_VALUES = {
     id: '',
     status: '',

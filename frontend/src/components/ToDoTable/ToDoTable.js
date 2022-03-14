@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Container, Card, CardBody } from 'reactstrap';
 import moment from 'moment';
 
 import Datatable from '../Common/Datatable';
 import TodoModalForm from '../ToDoModal/ToDoModalForm';
-import { AuthContext } from '../Contexts/AuthContext';
 import DelBtn from '../Common/DelBtn';
 
 // CSS Loaders
