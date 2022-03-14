@@ -1,6 +1,9 @@
 # todo-list
 You can access the application at https://to-do-list-assess.herokuapp.com/.
 
+Username: any
+Password: any
+
 # how to setup
 <ul>
 <li>Git clone the repo</li>
